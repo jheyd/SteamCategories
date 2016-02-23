@@ -28,7 +28,7 @@ public class Main {
 				return;
 
 			String vdf = loadVdf(file);
-			String json = vdfToJson(vdf);
+			String json = new Vdf(vdf).toJson();
 
 			List<Game> games = getGames(json);
 		} catch (Exception e) {
@@ -69,17 +69,6 @@ public class Main {
 			| UnsupportedLookAndFeelException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	private static String vdfToJson(String vdf) {
-		String json = vdf
-			.replaceAll("\"([^\"]*)\"(\\s*)\\{", "\"$1\" : \\{")
-			.replaceAll("\"([^\"]*)\"\\s*\"([^\"]*)\"", "\"$1\": \"$2\",")
-			.replaceAll(",(\\s*[}\\]])", "$1")
-			.replaceAll("([}\\]])(\\s*)(\"[^\"]*\":\\s*)?([\\{\\[])", "$1,$2$3$4")
-			.replaceAll("}(\\s*\"[^\"]*\":)", "},$1")
-			.replaceAll("\\}(\\s*\")", "},$1");
-		return "{" + json + "}";
 	}
 
 }
