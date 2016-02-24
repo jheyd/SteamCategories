@@ -2,7 +2,6 @@ package de.janheyd.steamcategories;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.UIManager.getSystemLookAndFeelClassName;
-import static org.apache.commons.io.FileUtils.readFileToString;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,10 +26,10 @@ public class Main {
 			if (file == null)
 				return;
 
-			String vdf = loadVdf(file);
+			Vdf vdf = loadVdf(file);
 			SteamConfig config;
 			try {
-				config = SteamConfig.fromVdf(new Vdf(vdf));
+				config = SteamConfig.fromVdf(vdf);
 			} catch (JsonProcessingException e) {
 				throw new RuntimeException("invalid JSON", e);
 			}
@@ -48,9 +47,9 @@ public class Main {
 		return fileChooser.getSelectedFile();
 	}
 
-	private static String loadVdf(File file) {
+	private static Vdf loadVdf(File file) {
 		try {
-			return readFileToString(file);
+			return Vdf.fromFile(file);
 		} catch (IOException e) {
 			throw new RuntimeException("could not open file " + file + ": " + e.getMessage());
 		}
