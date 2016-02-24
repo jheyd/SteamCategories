@@ -1,0 +1,42 @@
+{"UserRoamingConfigStore" : {
+	"Software" : {
+		"Valve" : {
+			"Steam" : {
+				"someKey": "someValue",
+				"apps" : {
+					"400" : {
+						"LastPlayed": "1360250633"
+					},
+					"220" : {
+						"LastPlayed": "1365247865",
+						"tags" : {
+							"0": "Shooter"
+						}
+					},
+					"72850" : {
+						"cloudenabled": "1",
+						"tags" : {
+							"0": "Action RPG"
+						}
+					},
+					"212680" : {
+						"cloudenabled": "1"
+					},
+					"420" : {
+						"tags" : {
+							"0": "Shooter"
+						}
+					}
+				},
+				"someOtherKey": "someOtherValue",
+				"SteamDefaultDialog": "#whatever"
+			}
+		}
+	},
+	"Web" : {
+		"WebFav0_URL": "https://www.google.com/",
+		"WebFav0_Name": "Google"
+	},
+	"Something": "Foo"
+}
+}
