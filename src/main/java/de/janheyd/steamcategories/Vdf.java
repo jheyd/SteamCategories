@@ -11,7 +11,6 @@ public class Vdf {
 		String s = content;
 		s = convertDictionaryKeys(s);
 		s = addCommas(s);
-		s = removeUnnecessaryCommas(s);
 		return "{" + s + "}";
 	}
 
@@ -21,10 +20,6 @@ public class Vdf {
 
 	private String convertDictionaryKeys(String s) {
 		return s.replaceAll("\"([^\"]*)\"\\s*([\\{\"])", "\"$1\" : $2");
-	}
-
-	private String removeUnnecessaryCommas(String s) {
-		return s.replaceAll(",(\\s*[}\\]])", "$1");
 	}
 
 }
