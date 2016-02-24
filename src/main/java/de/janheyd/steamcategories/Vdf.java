@@ -11,7 +11,6 @@ public class Vdf {
 		String s = content;
 		s = convertDictionaryKeysForComplexFields(s);
 		s = convertSimpleFields(s);
-		s = iHaveNoIdeaWhatThisShitDoes(s);
 		s = addCommasAfterComplexFields(s);
 		s = removeUnnecessaryCommas(s);
 		return "{" + s + "}";
@@ -27,10 +26,6 @@ public class Vdf {
 
 	private String convertSimpleFields(String s) {
 		return s.replaceAll("\"([^\"]*)\"\\s*\"([^\"]*)\"", "\"$1\": \"$2\",");
-	}
-
-	private String iHaveNoIdeaWhatThisShitDoes(String s) {
-		return s.replaceAll("([}\\]])(\\s*)(\"[^\"]*\":\\s*)?([\\{\\[])", "$1,$2$3$4");
 	}
 
 	private String removeUnnecessaryCommas(String s) {
