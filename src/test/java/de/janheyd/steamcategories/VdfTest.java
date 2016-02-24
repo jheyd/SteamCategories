@@ -1,3 +1,4 @@
+package de.janheyd.steamcategories;
 import static net.javacrumbs.jsonunit.JsonMatchers.jsonEquals;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.junit.Assert.assertThat;
