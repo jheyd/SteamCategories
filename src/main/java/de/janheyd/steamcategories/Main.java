@@ -48,18 +48,15 @@ public class Main {
 	private static File load() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showOpenDialog(null);
-		File loaded = fileChooser.getSelectedFile();
-		return loaded;
+		return fileChooser.getSelectedFile();
 	}
 
 	private static String loadVdf(File file) {
-		String vdf;
 		try {
-			vdf = readFileToString(file);
+			return readFileToString(file);
 		} catch (IOException e) {
 			throw new RuntimeException("could not open file " + file + ": " + e.getMessage());
 		}
-		return vdf;
 	}
 
 	private static void setLookAndFeel() {
