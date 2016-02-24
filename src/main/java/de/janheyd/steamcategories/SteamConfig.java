@@ -31,6 +31,10 @@ public class SteamConfig {
 		}
 	}
 
+	public static SteamConfig fromVdf(Vdf vdf) throws JsonProcessingException {
+		return fromJson(vdf.toJson());
+	}
+
 	public List<Game> getGameConfigs() {
 		JsonNode apps = jsonConfig.get("UserRoamingConfigStore")
 			.get("Software").get("Valve").get("Steam").get("apps");

@@ -28,10 +28,9 @@ public class Main {
 				return;
 
 			String vdf = loadVdf(file);
-			String json = new Vdf(vdf).toJson();
 			SteamConfig config;
 			try {
-				config = SteamConfig.fromJson(json);
+				config = SteamConfig.fromVdf(new Vdf(vdf));
 			} catch (JsonProcessingException e) {
 				throw new RuntimeException("invalid JSON", e);
 			}
