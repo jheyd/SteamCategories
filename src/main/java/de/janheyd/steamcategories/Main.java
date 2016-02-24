@@ -29,19 +29,17 @@ public class Main {
 
 			String vdf = loadVdf(file);
 			String json = new Vdf(vdf).toJson();
+			SteamConfig config;
+			try {
+				config = SteamConfig.fromJson(json);
+			} catch (JsonProcessingException e) {
+				throw new RuntimeException("invalid JSON", e);
+			}
 
-			List<Game> games = getGames(json);
+			List<Game> games = config.getGameConfigs();
 		} catch (Exception e) {
 			e.printStackTrace();
 			showMessageDialog(null, e);
-		}
-	}
-
-	private static List<Game> getGames(String json) {
-		try {
-			return SteamConfig.fromJson(json).getGameConfigs();
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException("invalid JSON", e);
 		}
 	}
 
