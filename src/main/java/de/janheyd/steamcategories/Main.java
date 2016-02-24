@@ -26,12 +26,13 @@ public class Main {
 			if (file == null)
 				return;
 
-			Vdf vdf = loadVdf(file);
 			SteamConfig config;
 			try {
-				config = SteamConfig.fromVdf(vdf);
+				config = SteamConfig.fromVdf(file);
 			} catch (JsonProcessingException e) {
 				throw new RuntimeException("invalid JSON", e);
+			} catch (IOException e) {
+				throw new RuntimeException("could not open file " + file + ": " + e.getMessage());
 			}
 
 			List<Game> games = config.getGameConfigs();
@@ -45,14 +46,6 @@ public class Main {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showOpenDialog(null);
 		return fileChooser.getSelectedFile();
-	}
-
-	private static Vdf loadVdf(File file) {
-		try {
-			return Vdf.fromFile(file);
-		} catch (IOException e) {
-			throw new RuntimeException("could not open file " + file + ": " + e.getMessage());
-		}
 	}
 
 	private static void setLookAndFeel() {

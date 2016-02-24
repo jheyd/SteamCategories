@@ -3,6 +3,7 @@ package de.janheyd.steamcategories;
 import static java.util.stream.Collectors.toList;
 import static lombok.AccessLevel.PROTECTED;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map.Entry;
@@ -29,6 +30,10 @@ public class SteamConfig {
 		} catch (IOException e) {
 			throw new RuntimeException("unexpected IOException during String processing", e);
 		}
+	}
+
+	public static SteamConfig fromVdf(File file) throws JsonProcessingException, IOException {
+		return fromVdf(Vdf.fromFile(file));
 	}
 
 	public static SteamConfig fromVdf(Vdf vdf) throws JsonProcessingException {
