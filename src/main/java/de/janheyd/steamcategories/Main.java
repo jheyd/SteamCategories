@@ -18,22 +18,11 @@ public class Main {
 	public static void main(String[] args) {
 		setLookAndFeel();
 		try {
-			File file;
-			if (args.length >= 1)
-				file = new File(args[0]);
-			else
-				file = load();
+			File file = getFile(args);
 			if (file == null)
 				return;
 
-			SteamConfig config;
-			try {
-				config = SteamConfig.fromVdf(file);
-			} catch (JsonProcessingException e) {
-				throw new RuntimeException("invalid JSON", e);
-			} catch (IOException e) {
-				throw new RuntimeException("could not open file " + file + ": " + e.getMessage());
-			}
+			SteamConfig config = getConfig(file);
 
 			List<Game> games = config.getGameConfigs();
 		} catch (Exception e) {
@@ -42,10 +31,31 @@ public class Main {
 		}
 	}
 
-	private static File load() {
+	private static File chooseFile() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showOpenDialog(null);
 		return fileChooser.getSelectedFile();
+	}
+
+	private static SteamConfig getConfig(File file) {
+		SteamConfig config;
+		try {
+			config = SteamConfig.fromVdf(file);
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException("invalid JSON", e);
+		} catch (IOException e) {
+			throw new RuntimeException("could not open file " + file + ": " + e.getMessage());
+		}
+		return config;
+	}
+
+	private static File getFile(String[] args) {
+		File file;
+		if (args.length >= 1)
+			file = new File(args[0]);
+		else
+			file = chooseFile();
+		return file;
 	}
 
 	private static void setLookAndFeel() {
