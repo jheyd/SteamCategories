@@ -26,7 +26,7 @@ public class SteamConfig {
 		try {
 			return new SteamConfig(mapper.readTree(json));
 		} catch (JsonProcessingException e) {
-			throw e;
+			throw e; // Why the fuck does JsonProcessingException extend IOException?
 		} catch (IOException e) {
 			throw new RuntimeException("unexpected IOException during String processing", e);
 		}
