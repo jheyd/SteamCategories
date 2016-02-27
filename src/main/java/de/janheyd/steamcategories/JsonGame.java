@@ -19,7 +19,7 @@ public class JsonGame {
 
 	@JsonProperty("LastPlayed") Long lastPlayed;
 	@JsonProperty("cloudenabled") Integer cloudEnabled;
-	Map<Integer, String> tags;
+	@JsonProperty("tags") Map<Integer, String> tags;
 
 	public static JsonGame fromGame(Game game) {
 		JsonGame result = new JsonGame();
