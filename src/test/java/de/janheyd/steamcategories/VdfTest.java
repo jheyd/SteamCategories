@@ -16,9 +16,9 @@ public class VdfTest {
 		String input = readFileToString(new File("src/test/resources/sharedconfig.vdf"));
 		String expectedOutput = readFileToString(new File("src/test/resources/expected"));
 
-		String acutalOutput = new Vdf(input).toJson();
+		String actualOutput = new Vdf(input).toJson();
 
-		assertThat(acutalOutput, jsonEquals(expectedOutput));
+		assertThat(actualOutput, jsonEquals(expectedOutput));
 	}
 
 }
