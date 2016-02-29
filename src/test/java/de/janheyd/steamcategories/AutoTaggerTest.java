@@ -21,9 +21,9 @@ public class AutoTaggerTest {
 		tags.put("id", asList("foo", "bar"));
 		AutoTagger autoTagger = new AutoTagger(tags);
 
-		autoTagger.tagGame(game);
+		Game taggedGame = autoTagger.tagGame(game);
 
-		assertThat(game.getGameTags(), contains("foo", "bar"));
+		assertThat(taggedGame.getGameTags(), contains("foo", "bar"));
 	}
 
 	@Test
@@ -32,9 +32,9 @@ public class AutoTaggerTest {
 		tags.put("id", asList("foo", "bar", "baz"));
 		AutoTagger autoTagger = new AutoTagger(tags, 1, asList("bar", "baz"));
 
-		autoTagger.tagGame(game);
+		Game taggedGame = autoTagger.tagGame(game);
 
-		assertThat(game.getGameTags(), contains("bar"));
+		assertThat(taggedGame.getGameTags(), contains("bar"));
 	}
 
 	@Test
@@ -43,9 +43,9 @@ public class AutoTaggerTest {
 		tags.put("id", asList("foo", "bar"));
 		AutoTagger autoTagger = new AutoTagger(tags, 1);
 
-		autoTagger.tagGame(game);
+		Game taggedGame = autoTagger.tagGame(game);
 
-		assertThat(game.getGameTags(), contains("foo"));
+		assertThat(taggedGame.getGameTags(), contains("foo"));
 	}
 
 	@Test
@@ -54,8 +54,8 @@ public class AutoTaggerTest {
 		tags.put("id", asList("foo", "bar"));
 		AutoTagger autoTagger = new AutoTagger(tags, asList("bar"));
 
-		autoTagger.tagGame(game);
+		Game taggedGame = autoTagger.tagGame(game);
 
-		assertThat(game.getGameTags(), contains("bar"));
+		assertThat(taggedGame.getGameTags(), contains("bar"));
 	}
 }

@@ -2,11 +2,11 @@ package de.janheyd.steamcategories;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Value;
+import lombok.experimental.Wither;
 
-@Data
-@AllArgsConstructor
+@Value
+@Wither
 public class Game {
 
 	String id;

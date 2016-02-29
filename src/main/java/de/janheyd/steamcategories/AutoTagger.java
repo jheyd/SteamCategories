@@ -34,8 +34,8 @@ public class AutoTagger {
 		this(tags, empty(), knownTags);
 	}
 
-	public void tagGame(Game game) {
-		game.setGameTags(getTagsFor(game));
+	public Game tagGame(Game game) {
+		return game.withGameTags(getTagsFor(game));
 	}
 
 	private List<String> filterGameTags(List<String> gameTags) {
