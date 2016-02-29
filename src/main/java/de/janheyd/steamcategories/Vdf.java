@@ -47,13 +47,8 @@ public class Vdf {
 	}
 
 	private static int countLeadingTabs(String line) {
-		int result = 0;
-		for (char c : line.toCharArray())
-			if (c == '\t')
-				result++ ;
-			else
-				break;
-		return result;
+		String trimmedLine = line.replaceAll("^\\t+", "");
+		return line.length() - trimmedLine.length();
 	}
 
 	private static String fixIndentation(String result) {
