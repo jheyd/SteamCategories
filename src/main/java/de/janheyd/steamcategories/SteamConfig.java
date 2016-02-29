@@ -1,13 +1,10 @@
 package de.janheyd.steamcategories;
 
-import static java.util.stream.Collectors.toList;
 import static lombok.AccessLevel.PROTECTED;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map.Entry;
-import java.util.stream.StreamSupport;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -40,21 +37,11 @@ public class SteamConfig {
 		return fromJson(vdf.toJson());
 	}
 
-	public List<Game> getGameConfigs() {
+	public GameConfigs getGameConfigs() {
 		JsonNode apps = jsonConfig.get("UserRoamingConfigStore")
 			.get("Software").get("Valve").get("Steam").get("apps");
 		Iterable<Entry<String, JsonNode>> iterable = () -> apps.fields();
-		return StreamSupport.stream(iterable.spliterator(), false)
-			.map(entry -> {
-				String key = entry.getKey();
-				JsonNode value = entry.getValue();
-				try {
-					JsonGame jsonGame = mapper.treeToValue(value, JsonGame.class);
-					return jsonGame.toGame(key);
-				} catch (JsonProcessingException e) {
-					throw new RuntimeException(e);
-				}
-			}).collect(toList());
+		return GameConfigs.from(iterable);
 	}
 
 }
