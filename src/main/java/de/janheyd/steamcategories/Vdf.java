@@ -26,13 +26,8 @@ public class Vdf {
 		return new Vdf(s);
 	}
 
-	private static String convertSimpleFieldsToVdf(String s) {
-		return s.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\"])", "\"$1\"\t\t$2");
-	}
-
-	private static String convertFieldsToVdf(String s) {
+	private static String convertComplexFieldsToVdf(String s) {
 		String result = s;
-		result = convertSimpleFieldsToVdf(s);
 		result = result.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\\{])", "\"$1\"\n$2");
 		List<String> modifiedLines = new ArrayList<>();
 		int previousIndent = 0;
@@ -47,6 +42,17 @@ public class Vdf {
 		}
 		result = String.join("\n", modifiedLines) + "\n";
 		return result;
+	}
+
+	private static String convertFieldsToVdf(String s) {
+		String result = s;
+		result = convertSimpleFieldsToVdf(result);
+		result = convertComplexFieldsToVdf(result);
+		return result;
+	}
+
+	private static String convertSimpleFieldsToVdf(String s) {
+		return s.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\"])", "\"$1\"\t\t$2");
 	}
 
 	private static int countLeadingTabs(String line) {
