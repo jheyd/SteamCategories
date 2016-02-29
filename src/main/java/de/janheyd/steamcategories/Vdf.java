@@ -82,10 +82,10 @@ public class Vdf {
 	}
 
 	private static String tabs(int count) {
-		String tabs = "";
+		StringBuffer tabs = new StringBuffer();
 		for (int i = 0; i < count; i++ )
-			tabs += "\t";
-		return tabs;
+			tabs.append("\t");
+		return tabs.toString();
 	}
 
 	public String toJson() {
