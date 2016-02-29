@@ -59,14 +59,13 @@ public class Vdf {
 	private static String fixIndentation(String result) {
 		List<String> modifiedLines = new ArrayList<>();
 		int previousIndent = 0;
-		for (String line : result.split("\n")) {
-			String modifiedLine = line;
+		for (String line : result.split("\n"))
 			if (line.startsWith("{"))
-				modifiedLine = tabs(previousIndent) + line;
-			else
+				modifiedLines.add(tabs(previousIndent) + line);
+			else {
 				previousIndent = countLeadingTabs(line);
-			modifiedLines.add(modifiedLine);
-		}
+				modifiedLines.add(line);
+			}
 		return String.join("\n", modifiedLines);
 	}
 
