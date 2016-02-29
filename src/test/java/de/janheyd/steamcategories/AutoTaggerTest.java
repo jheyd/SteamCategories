@@ -25,4 +25,17 @@ public class AutoTaggerTest {
 		assertThat(game.getGameTags(), contains("foo", "bar"));
 
 	}
+
+	@Test
+	public void shouldTagGameWithFirstTag() throws Exception {
+		Game game = new Game("id", null, null, emptyList());
+		Map<String, List<String>> tags = new HashMap<>();
+		tags.put("id", asList("foo", "bar"));
+		AutoTagger autoTagger = new AutoTagger(tags, 1);
+
+		autoTagger.tagGame(game);
+
+		assertThat(game.getGameTags(), contains("foo"));
+
+	}
 }
