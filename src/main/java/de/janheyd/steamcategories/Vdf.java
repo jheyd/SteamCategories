@@ -20,7 +20,7 @@ public class Vdf {
 
 	public static Vdf fromJson(String json) {
 		String s = json;
-		s = s.replaceAll("\r?\n", "\n");
+		s = s.replaceAll("\r\n", "\n");
 		s = removeBrackets(s);
 		s = convertFieldsToVdf(s);
 		s = removeCommas(s);
