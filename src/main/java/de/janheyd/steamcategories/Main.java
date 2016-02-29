@@ -1,40 +1,26 @@
 package de.janheyd.steamcategories;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-import static javax.swing.UIManager.getSystemLookAndFeelClassName;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import javax.swing.JFileChooser;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class Main {
 
 	public static void main(String[] args) {
-		setLookAndFeel();
 		try {
-			File file = getFile(args);
-			if (file == null)
+			if (args.length < 1)
 				return;
+
+			File file = new File(args[0]);
 
 			SteamConfig config = getConfig(file);
 
 			List<Game> games = config.getGameConfigs();
 		} catch (Exception e) {
-			e.printStackTrace();
-			showMessageDialog(null, e);
+			System.out.println(e.getMessage());
 		}
-	}
-
-	private static File chooseFile() {
-		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.showOpenDialog(null);
-		return fileChooser.getSelectedFile();
 	}
 
 	private static SteamConfig getConfig(File file) {
@@ -47,24 +33,6 @@ public class Main {
 			throw new RuntimeException("could not open file " + file + ": " + e.getMessage());
 		}
 		return config;
-	}
-
-	private static File getFile(String[] args) {
-		File file;
-		if (args.length >= 1)
-			file = new File(args[0]);
-		else
-			file = chooseFile();
-		return file;
-	}
-
-	private static void setLookAndFeel() {
-		try {
-			UIManager.setLookAndFeel(getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-			| UnsupportedLookAndFeelException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 }
