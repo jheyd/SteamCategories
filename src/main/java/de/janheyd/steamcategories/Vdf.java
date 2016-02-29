@@ -62,8 +62,7 @@ public class Vdf {
 		for (String line : result.split("\n")) {
 			String modifiedLine = line;
 			if (line.startsWith("{"))
-				for (int i = 0; i < previousIndent; i++ )
-					modifiedLine = "\t" + modifiedLine;
+				modifiedLine = tabs(previousIndent) + line;
 			else
 				previousIndent = countLeadingTabs(line);
 			modifiedLines.add(modifiedLine);
@@ -81,6 +80,13 @@ public class Vdf {
 
 	private static String removeCommas(String s) {
 		return s.replaceAll("([\\}\"]),", "$1");
+	}
+
+	private static String tabs(int count) {
+		String tabs = "";
+		for (int i = 0; i < count; i++ )
+			tabs += "\t";
+		return tabs;
 	}
 
 	public String toJson() {
