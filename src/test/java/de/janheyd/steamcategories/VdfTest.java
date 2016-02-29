@@ -7,31 +7,28 @@ import static org.junit.Assert.assertThat;
 
 import java.io.File;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class VdfTest {
 
-	private static final File VDF_FILE = new File("src/test/resources/sharedconfig.vdf");
-	private static final File JSON_FILE = new File("src/test/resources/sharedconfig.json");
+	private String json;
+	private String vdf;
+
+	@Before
+	public void setUp() throws Exception {
+		json = readFileToString(new File("src/test/resources/sharedconfig.json"));
+		vdf = readFileToString(new File("src/test/resources/sharedconfig.vdf"));
+	}
 
 	@Test
 	public void testFromJson() throws Exception {
-		String input = readFileToString(JSON_FILE);
-		String expectedOutput = readFileToString(VDF_FILE);
-
-		String actualOutput = Vdf.fromJson(input).toString();
-
-		assertThat(actualOutput, is(expectedOutput));
+		assertThat(Vdf.fromJson(json).toString(), is(vdf));
 	}
 
 	@Test
 	public void testToJson() throws Exception {
-		String input = readFileToString(VDF_FILE);
-		String expectedOutput = readFileToString(JSON_FILE);
-
-		String actualOutput = new Vdf(input).toJson();
-
-		assertThat(actualOutput, jsonEquals(expectedOutput));
+		assertThat(new Vdf(vdf).toJson(), jsonEquals(json));
 	}
 
 }
