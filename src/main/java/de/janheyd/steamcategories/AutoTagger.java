@@ -1,6 +1,7 @@
 package de.janheyd.steamcategories;
 
 import static java.util.Collections.emptyList;
+import static java.util.Optional.empty;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
@@ -8,30 +9,29 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class AutoTagger {
 
 	private Map<String, List<String>> tags;
-	private Optional<Integer> numberOfTagsToUse = Optional.empty();
-	private List<String> knownTags = emptyList();
+	private Optional<Integer> numberOfTagsToUse;
+	private List<String> knownTags;
 
 	public AutoTagger(Map<String, List<String>> tags) {
-		this.tags = tags;
+		this(tags, empty(), emptyList());
 	}
 
 	public AutoTagger(Map<String, List<String>> tags, int numberOfTagsToUse) {
-		this(tags);
-		this.numberOfTagsToUse = Optional.of(numberOfTagsToUse);
+		this(tags, Optional.of(numberOfTagsToUse), emptyList());
 	}
 
 	public AutoTagger(Map<String, List<String>> tags, int numberOfTagsToUse, List<String> knownTags) {
-		this(tags);
-		this.numberOfTagsToUse = Optional.of(numberOfTagsToUse);
-		this.knownTags = knownTags;
+		this(tags, Optional.of(numberOfTagsToUse), knownTags);
 	}
 
 	public AutoTagger(Map<String, List<String>> tags, List<String> knownTags) {
-		this(tags);
-		this.knownTags = knownTags;
+		this(tags, empty(), knownTags);
 	}
 
 	public void tagGame(Game game) {
