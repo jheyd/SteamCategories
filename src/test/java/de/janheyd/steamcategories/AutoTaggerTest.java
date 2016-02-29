@@ -23,7 +23,6 @@ public class AutoTaggerTest {
 		autoTagger.tagGame(game);
 
 		assertThat(game.getGameTags(), contains("foo", "bar"));
-
 	}
 
 	@Test
@@ -36,7 +35,6 @@ public class AutoTaggerTest {
 		autoTagger.tagGame(game);
 
 		assertThat(game.getGameTags(), contains("bar"));
-
 	}
 
 	@Test
@@ -49,7 +47,6 @@ public class AutoTaggerTest {
 		autoTagger.tagGame(game);
 
 		assertThat(game.getGameTags(), contains("foo"));
-
 	}
 
 	@Test
@@ -62,6 +59,5 @@ public class AutoTaggerTest {
 		autoTagger.tagGame(game);
 
 		assertThat(game.getGameTags(), contains("bar"));
-
 	}
 }
