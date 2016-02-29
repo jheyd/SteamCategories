@@ -11,10 +11,13 @@ import org.junit.Test;
 
 public class VdfTest {
 
+	private static final File VDF_FILE = new File("src/test/resources/sharedconfig.vdf");
+	private static final File JSON_FILE = new File("src/test/resources/sharedconfig.json");
+
 	@Test
 	public void testFromJson() throws Exception {
-		String input = readFileToString(new File("src/test/resources/sharedconfig.json"));
-		String expectedOutput = readFileToString(new File("src/test/resources/sharedconfig.vdf"));
+		String input = readFileToString(JSON_FILE);
+		String expectedOutput = readFileToString(VDF_FILE);
 
 		String actualOutput = Vdf.fromJson(input).toString();
 
@@ -23,8 +26,8 @@ public class VdfTest {
 
 	@Test
 	public void testToJson() throws Exception {
-		String input = readFileToString(new File("src/test/resources/sharedconfig.vdf"));
-		String expectedOutput = readFileToString(new File("src/test/resources/sharedconfig.json"));
+		String input = readFileToString(VDF_FILE);
+		String expectedOutput = readFileToString(JSON_FILE);
 
 		String actualOutput = new Vdf(input).toJson();
 
