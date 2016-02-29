@@ -20,6 +20,7 @@ public class Vdf {
 
 	public static Vdf fromJson(String json) {
 		String s = json;
+		s = s.replaceAll("\r?\n", "\n");
 		s = removeBrackets(s);
 		s = convertFieldsToVdf(s);
 		s = removeCommas(s);
@@ -31,7 +32,7 @@ public class Vdf {
 		result = result.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\\{])", "\"$1\"\n$2");
 		List<String> modifiedLines = new ArrayList<>();
 		int previousIndent = 0;
-		for (String line : result.split("\r?\n")) {
+		for (String line : result.split("\n")) {
 			String modifiedLine = line;
 			if (line.startsWith("{"))
 				for (int i = 0; i < previousIndent; i++ )
