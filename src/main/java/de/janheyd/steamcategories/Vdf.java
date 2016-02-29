@@ -29,7 +29,7 @@ public class Vdf {
 
 	private static String convertComplexFieldsToVdf(String s) {
 		String result = s;
-		result = result.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\\{])", "\"$1\"\n$2");
+		result = removeColons(result);
 		List<String> modifiedLines = new ArrayList<>();
 		int previousIndent = 0;
 		for (String line : result.split("\n")) {
@@ -43,6 +43,10 @@ public class Vdf {
 		}
 		result = String.join("\n", modifiedLines) + "\n";
 		return result;
+	}
+
+	private static String removeColons(String result) {
+		return result.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\\{])", "\"$1\"\n$2");
 	}
 
 	private static String convertFieldsToVdf(String s) {
