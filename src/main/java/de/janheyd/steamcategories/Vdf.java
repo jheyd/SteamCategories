@@ -31,18 +31,7 @@ public class Vdf {
 	private static String convertComplexFieldsToVdf(String s) {
 		String result = s;
 		result = removeColons(result);
-		List<String> modifiedLines = new ArrayList<>();
-		int previousIndent = 0;
-		for (String line : result.split("\n")) {
-			String modifiedLine = line;
-			if (line.startsWith("{"))
-				for (int i = 0; i < previousIndent; i++ )
-					modifiedLine = "\t" + modifiedLine;
-			else
-				previousIndent = countLeadingTabs(line);
-			modifiedLines.add(modifiedLine);
-		}
-		result = String.join("\n", modifiedLines);
+		result = fixIndentation(result);
 		return result;
 	}
 
@@ -65,6 +54,21 @@ public class Vdf {
 			else
 				break;
 		return result;
+	}
+
+	private static String fixIndentation(String result) {
+		List<String> modifiedLines = new ArrayList<>();
+		int previousIndent = 0;
+		for (String line : result.split("\n")) {
+			String modifiedLine = line;
+			if (line.startsWith("{"))
+				for (int i = 0; i < previousIndent; i++ )
+					modifiedLine = "\t" + modifiedLine;
+			else
+				previousIndent = countLeadingTabs(line);
+			modifiedLines.add(modifiedLine);
+		}
+		return String.join("\n", modifiedLines);
 	}
 
 	private static String removeBrackets(String s) {
