@@ -27,6 +27,19 @@ public class AutoTaggerTest {
 	}
 
 	@Test
+	public void shouldTagGameWithFirstKnownTag() throws Exception {
+		Game game = new Game("id", null, null, emptyList());
+		Map<String, List<String>> tags = new HashMap<>();
+		tags.put("id", asList("foo", "bar", "baz"));
+		AutoTagger autoTagger = new AutoTagger(tags, 1, asList("bar", "baz"));
+
+		autoTagger.tagGame(game);
+
+		assertThat(game.getGameTags(), contains("bar"));
+
+	}
+
+	@Test
 	public void shouldTagGameWithFirstTag() throws Exception {
 		Game game = new Game("id", null, null, emptyList());
 		Map<String, List<String>> tags = new HashMap<>();

@@ -23,6 +23,12 @@ public class AutoTagger {
 		this.numberOfTagsToUse = Optional.of(numberOfTagsToUse);
 	}
 
+	public AutoTagger(Map<String, List<String>> tags, int numberOfTagsToUse, List<String> knownTags) {
+		this(tags);
+		this.numberOfTagsToUse = Optional.of(numberOfTagsToUse);
+		this.knownTags = knownTags;
+	}
+
 	public AutoTagger(Map<String, List<String>> tags, List<String> knownTags) {
 		this(tags);
 		this.knownTags = knownTags;
