@@ -52,16 +52,16 @@ public class Vdf {
 	}
 
 	private static String fixIndentation(String result) {
-		List<String> modifiedLines = new ArrayList<>();
+		List<String> resultLines = new ArrayList<>();
 		int previousIndent = 0;
 		for (String line : result.split("\n"))
 			if (line.startsWith("{"))
-				modifiedLines.add(tabs(previousIndent) + line);
+				resultLines.add(tabs(previousIndent) + line);
 			else {
 				previousIndent = countLeadingTabs(line);
-				modifiedLines.add(line);
+				resultLines.add(line);
 			}
-		return String.join("\n", modifiedLines);
+		return String.join("\n", resultLines);
 	}
 
 	private static String removeBrackets(String s) {
