@@ -2,7 +2,6 @@ package de.janheyd.steamcategories;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -14,10 +13,8 @@ public class Main {
 				return;
 
 			File file = new File(args[0]);
-
 			SteamConfig config = getConfig(file);
 
-			List<Game> games = config.getGameConfigs();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
