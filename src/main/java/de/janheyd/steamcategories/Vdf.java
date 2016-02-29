@@ -24,6 +24,7 @@ public class Vdf {
 		s = removeBrackets(s);
 		s = convertFieldsToVdf(s);
 		s = removeCommas(s);
+		s = s + "\n";
 		return new Vdf(s);
 	}
 
@@ -41,12 +42,8 @@ public class Vdf {
 				previousIndent = countLeadingTabs(line);
 			modifiedLines.add(modifiedLine);
 		}
-		result = String.join("\n", modifiedLines) + "\n";
+		result = String.join("\n", modifiedLines);
 		return result;
-	}
-
-	private static String removeColons(String result) {
-		return result.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\\{])", "\"$1\"\n$2");
 	}
 
 	private static String convertFieldsToVdf(String s) {
@@ -72,6 +69,10 @@ public class Vdf {
 
 	private static String removeBrackets(String s) {
 		return s.substring(1, s.length() - 1);
+	}
+
+	private static String removeColons(String result) {
+		return result.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\\{])", "\"$1\"\n$2");
 	}
 
 	private static String removeCommas(String s) {
