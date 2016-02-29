@@ -38,4 +38,17 @@ public class AutoTaggerTest {
 		assertThat(game.getGameTags(), contains("foo"));
 
 	}
+
+	@Test
+	public void shouldTagGameWithKnownTag() throws Exception {
+		Game game = new Game("id", null, null, emptyList());
+		Map<String, List<String>> tags = new HashMap<>();
+		tags.put("id", asList("foo", "bar"));
+		AutoTagger autoTagger = new AutoTagger(tags, asList("bar"));
+
+		autoTagger.tagGame(game);
+
+		assertThat(game.getGameTags(), contains("bar"));
+
+	}
 }
