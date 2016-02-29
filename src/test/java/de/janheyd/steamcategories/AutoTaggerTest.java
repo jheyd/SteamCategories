@@ -13,9 +13,10 @@ import org.junit.Test;
 
 public class AutoTaggerTest {
 
+	private Game game = new Game("id", null, null, emptyList());
+
 	@Test
 	public void shouldTagGameWithAllTags() throws Exception {
-		Game game = new Game("id", null, null, emptyList());
 		Map<String, List<String>> tags = new HashMap<>();
 		tags.put("id", asList("foo", "bar"));
 		AutoTagger autoTagger = new AutoTagger(tags);
@@ -27,7 +28,6 @@ public class AutoTaggerTest {
 
 	@Test
 	public void shouldTagGameWithFirstKnownTag() throws Exception {
-		Game game = new Game("id", null, null, emptyList());
 		Map<String, List<String>> tags = new HashMap<>();
 		tags.put("id", asList("foo", "bar", "baz"));
 		AutoTagger autoTagger = new AutoTagger(tags, 1, asList("bar", "baz"));
@@ -39,7 +39,6 @@ public class AutoTaggerTest {
 
 	@Test
 	public void shouldTagGameWithFirstTag() throws Exception {
-		Game game = new Game("id", null, null, emptyList());
 		Map<String, List<String>> tags = new HashMap<>();
 		tags.put("id", asList("foo", "bar"));
 		AutoTagger autoTagger = new AutoTagger(tags, 1);
@@ -51,7 +50,6 @@ public class AutoTaggerTest {
 
 	@Test
 	public void shouldTagGameWithKnownTag() throws Exception {
-		Game game = new Game("id", null, null, emptyList());
 		Map<String, List<String>> tags = new HashMap<>();
 		tags.put("id", asList("foo", "bar"));
 		AutoTagger autoTagger = new AutoTagger(tags, asList("bar"));
