@@ -21,18 +21,18 @@ public class Vdf {
 	public static Vdf fromJson(String json) {
 		String s = json;
 		s = removeBrackets(s);
-		s = convertDictionaryKeysToVdf(s);
+		s = convertFieldsToVdf(s);
 		s = removeCommas(s);
 		return new Vdf(s);
 	}
 
-	private static String convertDictionaryKeysForSimpleFieldsToVdf(String s) {
+	private static String convertSimpleFieldsToVdf(String s) {
 		return s.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\"])", "\"$1\"\t\t$2");
 	}
 
-	private static String convertDictionaryKeysToVdf(String s) {
+	private static String convertFieldsToVdf(String s) {
 		String result = s;
-		result = convertDictionaryKeysForSimpleFieldsToVdf(s);
+		result = convertSimpleFieldsToVdf(s);
 		result = result.replaceAll("\"([^\"]*)\"\\s*\\:\\s*([\\{])", "\"$1\"\n$2");
 		List<String> modifiedLines = new ArrayList<>();
 		int previousIndent = 0;
